@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CreatorFolio – Portfolio Builder</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="dark-mode">
+
+  <!-- ===== APP SHELL ===== -->
+  <div class="app-shell">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="logo">Creator<span class="logo-accent">Folio</span></span>
+      </div>
+      <div class="topbar-center">
+        <button class="tab-btn active" data-tab="editor"><i class="ph ph-pencil-simple"></i> Edit</button>
+        <button class="tab-btn" data-tab="preview"><i class="ph ph-eye"></i> Preview</button>
+      </div>
+      <div class="topbar-right">
+        <button class="btn-ghost" id="resetBtn"><i class="ph ph-arrow-counter-clockwise"></i> Reset</button>
+        <button class="btn-ghost" id="copyLinkBtn"><i class="ph ph-link"></i> Copy Link</button>
+        <button class="btn-primary" id="downloadBtn"><i class="ph ph-download-simple"></i> Export</button>
+      </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div class="main-layout">
+
+      <!-- ===== LEFT: EDITOR PANEL ===== -->
+      <aside class="editor-panel" id="editorPanel">
+
+        <!-- Editor nav tabs -->
+        <nav class="editor-nav">
+          <button class="enav-btn active" data-section="profile"><i class="ph ph-user-circle"></i><span>Profile</span></button>
+          <button class="enav-btn" data-section="gallery"><i class="ph ph-images"></i><span>Gallery</span></button>
+          <button class="enav-btn" data-section="collabs"><i class="ph ph-handshake"></i><span>Collabs</span></button>
+          <button class="enav-btn" data-section="stats"><i class="ph ph-chart-bar"></i><span>Stats</span></button>
+          <button class="enav-btn" data-section="testimonials"><i class="ph ph-quotes"></i><span>Reviews</span></button>
+          <button class="enav-btn" data-section="skills"><i class="ph ph-lightning"></i><span>Skills</span></button>
+          <button class="enav-btn" data-section="services"><i class="ph ph-briefcase"></i><span>Services</span></button>
+          <button class="enav-btn" data-section="contact"><i class="ph ph-envelope"></i><span>Contact</span></button>
+          <button class="enav-btn" data-section="theme"><i class="ph ph-palette"></i><span>Theme</span></button>
+          <button class="enav-btn" data-section="sections"><i class="ph ph-sliders"></i><span>Sections</span></button>
+        </nav>
+
+        <!-- Editor content -->
+        <div class="editor-content">
+
+          <!-- PROFILE EDITOR -->
+          <div class="editor-section active" id="editor-profile">
+            <h3 class="editor-heading">Profile</h3>
+
+            <div class="avatar-upload-area" id="avatarUploadArea">
+              <img src="" alt="Profile" class="avatar-preview" id="avatarPreview" />
+              <div class="avatar-overlay">
+                <i class="ph ph-camera"></i>
+                <span>Upload Photo</span>
+              </div>
+              <input type="file" id="avatarInput" accept="image/*" hidden />
+            </div>
+
+            <div class="field-group">
+              <label>Creator Name</label>
+              <input type="text" id="creatorName" placeholder="e.g. Alex Rivera" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label>Profession / Niche</label>
+              <input type="text" id="creatorProfession" placeholder="e.g. Lifestyle & Travel Creator" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label>Short Bio</label>
+              <textarea id="creatorBio" rows="3" placeholder="Tell brands about yourself..." class="field-input"></textarea>
+            </div>
+            <div class="field-group">
+              <label>Location</label>
+              <input type="text" id="creatorLocation" placeholder="e.g. Mumbai, India" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label>Email</label>
+              <input type="email" id="creatorEmail" placeholder="hello@you.com" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label>Website</label>
+              <input type="url" id="creatorWebsite" placeholder="https://yoursite.com" class="field-input" />
+            </div>
+
+            <h4 class="sub-heading">Social Links</h4>
+            <div class="field-group">
+              <label><i class="ph ph-instagram-logo"></i> Instagram</label>
+              <input type="text" id="socialInstagram" placeholder="@handle" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label><i class="ph ph-youtube-logo"></i> YouTube</label>
+              <input type="text" id="socialYoutube" placeholder="@channel" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label><i class="ph ph-linkedin-logo"></i> LinkedIn</label>
+              <input type="text" id="socialLinkedin" placeholder="linkedin.com/in/you" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label><i class="ph ph-x-logo"></i> X (Twitter)</label>
+              <input type="text" id="socialX" placeholder="@handle" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label>"Work With Me" Button Label</label>
+              <input type="text" id="ctaLabel" placeholder="Work With Me" class="field-input" />
+            </div>
+          </div>
+
+          <!-- GALLERY EDITOR -->
+          <div class="editor-section" id="editor-gallery">
+            <h3 class="editor-heading">Featured Work</h3>
+            <button class="btn-add" id="addGalleryItem"><i class="ph ph-plus"></i> Add Project</button>
+            <div id="galleryEditorList" class="editor-list"></div>
+          </div>
+
+          <!-- COLLABS EDITOR -->
+          <div class="editor-section" id="editor-collabs">
+            <h3 class="editor-heading">Collaborations</h3>
+            <button class="btn-add" id="addCollab"><i class="ph ph-plus"></i> Add Collaboration</button>
+            <div id="collabEditorList" class="editor-list"></div>
+          </div>
+
+          <!-- STATS EDITOR -->
+          <div class="editor-section" id="editor-stats">
+            <h3 class="editor-heading">Stats & Highlights</h3>
+            <div id="statsEditorList" class="stats-editor-grid"></div>
+          </div>
+
+          <!-- TESTIMONIALS EDITOR -->
+          <div class="editor-section" id="editor-testimonials">
+            <h3 class="editor-heading">Testimonials</h3>
+            <button class="btn-add" id="addTestimonial"><i class="ph ph-plus"></i> Add Testimonial</button>
+            <div id="testimonialEditorList" class="editor-list"></div>
+          </div>
+
+          <!-- SKILLS EDITOR -->
+          <div class="editor-section" id="editor-skills">
+            <h3 class="editor-heading">Skills</h3>
+            <div class="skill-add-row">
+              <input type="text" id="newSkillInput" placeholder="Add a skill..." class="field-input" />
+              <button class="btn-icon-add" id="addSkillBtn"><i class="ph ph-plus"></i></button>
+            </div>
+            <div id="skillTagsEditor" class="skill-tags-editor"></div>
+          </div>
+
+          <!-- SERVICES EDITOR -->
+          <div class="editor-section" id="editor-services">
+            <h3 class="editor-heading">Services</h3>
+            <button class="btn-add" id="addService"><i class="ph ph-plus"></i> Add Service</button>
+            <div id="serviceEditorList" class="editor-list"></div>
+          </div>
+
+          <!-- CONTACT EDITOR -->
+          <div class="editor-section" id="editor-contact">
+            <h3 class="editor-heading">Contact</h3>
+            <div class="field-group">
+              <label>Email</label>
+              <input type="email" id="contactEmail" class="field-input" placeholder="hello@you.com" />
+            </div>
+            <div class="field-group">
+              <label>Phone</label>
+              <input type="tel" id="contactPhone" class="field-input" placeholder="+91 98765 43210" />
+            </div>
+            <div class="field-group">
+              <label>Website</label>
+              <input type="url" id="contactWebsite" class="field-input" placeholder="https://yoursite.com" />
+            </div>
+            <div class="field-group">
+              <label>Instagram</label>
+              <input type="text" id="contactInstagram" class="field-input" placeholder="@handle" />
+            </div>
+            <div class="field-group">
+              <label>YouTube</label>
+              <input type="text" id="contactYoutube" class="field-input" placeholder="@channel" />
+            </div>
+            <div class="field-group">
+              <label>LinkedIn</label>
+              <input type="text" id="contactLinkedin" class="field-input" placeholder="linkedin.com/in/you" />
+            </div>
+            <div class="field-group">
+              <label>Location</label>
+              <input type="text" id="contactLocation" class="field-input" placeholder="City, Country" />
+            </div>
+          </div>
+
+          <!-- THEME EDITOR -->
+          <div class="editor-section" id="editor-theme">
+            <h3 class="editor-heading">Theme</h3>
+
+            <div class="field-group">
+              <label>Mode</label>
+              <div class="mode-toggle-row">
+                <button class="mode-btn active" id="darkModeBtn"><i class="ph ph-moon"></i> Dark</button>
+                <button class="mode-btn" id="lightModeBtn"><i class="ph ph-sun"></i> Light</button>
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Primary Color</label>
+              <div class="color-row">
+                <input type="color" id="primaryColor" class="color-picker" value="#a78bfa" />
+                <div class="color-presets" id="primaryPresets">
+                  <div class="color-dot" style="background:#a78bfa" data-target="primary" data-color="#a78bfa"></div>
+                  <div class="color-dot" style="background:#f472b6" data-target="primary" data-color="#f472b6"></div>
+                  <div class="color-dot" style="background:#34d399" data-target="primary" data-color="#34d399"></div>
+                  <div class="color-dot" style="background:#60a5fa" data-target="primary" data-color="#60a5fa"></div>
+                  <div class="color-dot" style="background:#fb923c" data-target="primary" data-color="#fb923c"></div>
+                  <div class="color-dot" style="background:#facc15" data-target="primary" data-color="#facc15"></div>
+                </div>
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Accent Color</label>
+              <div class="color-row">
+                <input type="color" id="accentColor" class="color-picker" value="#7c3aed" />
+                <div class="color-presets">
+                  <div class="color-dot" style="background:#7c3aed" data-target="accent" data-color="#7c3aed"></div>
+                  <div class="color-dot" style="background:#be185d" data-target="accent" data-color="#be185d"></div>
+                  <div class="color-dot" style="background:#059669" data-target="accent" data-color="#059669"></div>
+                  <div class="color-dot" style="background:#1d4ed8" data-target="accent" data-color="#1d4ed8"></div>
+                  <div class="color-dot" style="background:#c2410c" data-target="accent" data-color="#c2410c"></div>
+                  <div class="color-dot" style="background:#a16207" data-target="accent" data-color="#a16207"></div>
+                </div>
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Font Style</label>
+              <select id="fontSelect" class="field-input">
+                <option value="'Syne', sans-serif">Syne (Default)</option>
+                <option value="'Inter', sans-serif">Inter (Clean)</option>
+                <option value="Georgia, serif">Georgia (Classic)</option>
+                <option value="'Courier New', monospace">Courier (Mono)</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>Border Radius</label>
+              <div class="radius-row">
+                <button class="radius-btn active" data-radius="8px">Soft</button>
+                <button class="radius-btn" data-radius="0px">Sharp</button>
+                <button class="radius-btn" data-radius="20px">Rounded</button>
+                <button class="radius-btn" data-radius="9999px">Pill</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTIONS EDITOR -->
+          <div class="editor-section" id="editor-sections">
+            <h3 class="editor-heading">Show / Hide Sections</h3>
+            <p class="editor-hint">Toggle which sections appear on your portfolio.</p>
+            <div class="section-toggles" id="sectionToggles">
+              <!-- Injected by JS -->
+            </div>
+          </div>
+
+        </div><!-- /editor-content -->
+      </aside>
+
+      <!-- ===== RIGHT: LIVE PREVIEW ===== -->
+      <main class="preview-panel" id="previewPanel">
+        <div class="preview-scroll-area">
+          <div class="portfolio" id="portfolioRoot">
+
+            <!-- HERO / PROFILE -->
+            <section class="pf-hero" id="pf-section-about">
+              <div class="pf-hero-bg"></div>
+              <div class="pf-hero-inner">
+                <div class="pf-avatar-wrap">
+                  <img src="" alt="Creator" id="pf-avatar" class="pf-avatar" />
+                  <div class="pf-avatar-ring"></div>
+                </div>
+                <div class="pf-hero-text">
+                  <div class="pf-badge" id="pf-profession">Lifestyle Creator</div>
+                  <h1 class="pf-name" id="pf-name">Your Name</h1>
+                  <p class="pf-bio" id="pf-bio">Add your bio in the editor →</p>
+                  <div class="pf-meta">
+                    <span class="pf-meta-item" id="pf-location-display"><i class="ph ph-map-pin"></i> <span id="pf-location">Location</span></span>
+                    <span class="pf-meta-item" id="pf-email-display"><i class="ph ph-envelope"></i> <span id="pf-email">Email</span></span>
+                  </div>
+                  <div class="pf-socials" id="pf-socials">
+                    <a class="pf-social-btn" id="pf-instagram" href="#"><i class="ph ph-instagram-logo"></i></a>
+                    <a class="pf-social-btn" id="pf-youtube" href="#"><i class="ph ph-youtube-logo"></i></a>
+                    <a class="pf-social-btn" id="pf-linkedin" href="#"><i class="ph ph-linkedin-logo"></i></a>
+                    <a class="pf-social-btn" id="pf-x" href="#"><i class="ph ph-x-logo"></i></a>
+                  </div>
+                  <button class="pf-cta-btn" id="pf-cta">Work With Me</button>
+                </div>
+              </div>
+            </section>
+
+            <!-- STATS -->
+            <section class="pf-section" id="pf-section-stats">
+              <div class="pf-section-inner">
+                <div class="pf-stats-grid" id="pf-stats-grid">
+                  <!-- Injected by JS -->
+                </div>
+              </div>
+            </section>
+
+            <!-- GALLERY -->
+            <section class="pf-section" id="pf-section-gallery">
+              <div class="pf-section-inner">
+                <h2 class="pf-section-title">Featured <span class="accent">Work</span></h2>
+                <p class="pf-section-sub">A curated selection of my best projects</p>
+                <div class="pf-gallery-grid" id="pf-gallery-grid">
+                  <!-- Injected by JS -->
+                </div>
+              </div>
+            </section>
+
+            <!-- COLLABORATIONS -->
+            <section class="pf-section" id="pf-section-collaborations">
+              <div class="pf-section-inner">
+                <h2 class="pf-section-title">Past <span class="accent">Collaborations</span></h2>
+                <p class="pf-section-sub">Brands I've partnered with</p>
+                <div class="pf-collabs-grid" id="pf-collabs-grid">
+                  <!-- Injected by JS -->
+                </div>
+              </div>
+            </section>
+
+            <!-- TESTIMONIALS -->
+            <section class="pf-section" id="pf-section-testimonials">
+              <div class="pf-section-inner">
+                <h2 class="pf-section-title">What Brands <span class="accent">Say</span></h2>
+                <div class="pf-testimonials-grid" id="pf-testimonials-grid">
+                  <!-- Injected by JS -->
+                </div>
+              </div>
+            </section>
+
+            <!-- SKILLS -->
+            <section class="pf-section" id="pf-section-skills">
+              <div class="pf-section-inner">
+                <h2 class="pf-section-title">Skills & <span class="accent">Expertise</span></h2>
+                <div class="pf-skills-wrap" id="pf-skills-wrap">
+                  <!-- Injected by JS -->
+                </div>
+              </div>
+            </section>
+
+            <!-- SERVICES -->
+            <section class="pf-section" id="pf-section-services">
+              <div class="pf-section-inner">
+                <h2 class="pf-section-title">My <span class="accent">Services</span></h2>
+                <div class="pf-services-grid" id="pf-services-grid">
+                  <!-- Injected by JS -->
+                </div>
+              </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section class="pf-section pf-contact-section" id="pf-section-contact">
+              <div class="pf-section-inner">
+                <h2 class="pf-section-title">Let's <span class="accent">Connect</span></h2>
+                <div class="pf-contact-grid" id="pf-contact-grid">
+                  <!-- Injected by JS -->
+                </div>
+              </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="pf-footer">
+              <span>Built with <span class="accent">CreatorFolio</span> ✦</span>
+            </footer>
+
+          </div><!-- /portfolio -->
+        </div><!-- /preview-scroll-area -->
+      </main>
+    </div><!-- /main-layout -->
+  </div><!-- /app-shell -->
+
+  <!-- ===== MODALS ===== -->
+
+  <!-- Gallery Item Modal -->
+  <div class="modal-overlay" id="galleryModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="galleryModalTitle">Add Project</h3>
+        <button class="modal-close" data-modal="galleryModal"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-thumb-upload" id="galleryThumbArea">
+          <img id="galleryThumbPreview" src="" alt="" />
+          <div class="thumb-overlay"><i class="ph ph-image"></i><span>Upload Image</span></div>
+          <input type="file" id="galleryThumbInput" accept="image/*" hidden />
+        </div>
+        <div class="field-group"><label>Project Title</label><input type="text" id="gTitle" class="field-input" placeholder="Campaign Name" /></div>
+        <div class="field-group"><label>Brand</label><input type="text" id="gBrand" class="field-input" placeholder="Brand Name" /></div>
+        <div class="field-group"><label>Category</label><input type="text" id="gCategory" class="field-input" placeholder="e.g. Fashion, Tech" /></div>
+        <div class="field-group"><label>Description</label><textarea id="gDesc" class="field-input" rows="2" placeholder="Short description..."></textarea></div>
+        <div class="field-group"><label>Engagement / Stats</label><input type="text" id="gStats" class="field-input" placeholder="e.g. 2.3M views · 8.4% ER" /></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" data-modal="galleryModal">Cancel</button>
+        <button class="btn-primary" id="saveGalleryItem">Save Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collab Modal -->
+  <div class="modal-overlay" id="collabModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="collabModalTitle">Add Collaboration</h3>
+        <button class="modal-close" data-modal="collabModal"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group"><label>Brand Name</label><input type="text" id="cBrand" class="field-input" placeholder="Brand Inc." /></div>
+        <div class="field-group"><label>Campaign Title</label><input type="text" id="cCampaign" class="field-input" placeholder="Summer Campaign 2024" /></div>
+        <div class="field-group"><label>Description</label><textarea id="cDesc" class="field-input" rows="2"></textarea></div>
+        <div class="field-group"><label>Reach</label><input type="text" id="cReach" class="field-input" placeholder="e.g. 500K" /></div>
+        <div class="field-group"><label>Views</label><input type="text" id="cViews" class="field-input" placeholder="e.g. 1.2M" /></div>
+        <div class="field-group"><label>Engagement Rate</label><input type="text" id="cER" class="field-input" placeholder="e.g. 6.2%" /></div>
+        <div class="field-group"><label>Brand Emoji / Icon</label><input type="text" id="cEmoji" class="field-input" placeholder="e.g. 🎯 or leave blank" /></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" data-modal="collabModal">Cancel</button>
+        <button class="btn-primary" id="saveCollab">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonial Modal -->
+  <div class="modal-overlay" id="testimonialModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="testimonialModalTitle">Add Testimonial</h3>
+        <button class="modal-close" data-modal="testimonialModal"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group"><label>Client Name</label><input type="text" id="tName" class="field-input" placeholder="Jane Smith" /></div>
+        <div class="field-group"><label>Company</label><input type="text" id="tCompany" class="field-input" placeholder="BrandCo" /></div>
+        <div class="field-group"><label>Rating (1–5)</label><input type="number" id="tRating" class="field-input" min="1" max="5" value="5" /></div>
+        <div class="field-group"><label>Review</label><textarea id="tReview" class="field-input" rows="3" placeholder="This creator delivered amazing results..."></textarea></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" data-modal="testimonialModal">Cancel</button>
+        <button class="btn-primary" id="saveTestimonial">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Modal -->
+  <div class="modal-overlay" id="serviceModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Service</h3>
+        <button class="modal-close" data-modal="serviceModal"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group"><label>Icon (emoji)</label><input type="text" id="sIcon" class="field-input" placeholder="e.g. 📸" /></div>
+        <div class="field-group"><label>Service Name</label><input type="text" id="sName" class="field-input" placeholder="Sponsored Posts" /></div>
+        <div class="field-group"><label>Description</label><textarea id="sDesc" class="field-input" rows="2" placeholder="Short description..."></textarea></div>
+        <div class="field-group"><label>Starting Price</label><input type="text" id="sPrice" class="field-input" placeholder="e.g. ₹15,000 / $200" /></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" data-modal="serviceModal">Cancel</button>
+        <button class="btn-primary" id="saveService">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
